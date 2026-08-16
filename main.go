@@ -19,10 +19,13 @@ type DicItem struct {
 }
 
 type Pred struct {
-	N  int     `json:"n"`
-	F1 []int64 `json:"f1"`
-	F2 []int64 `json:"f2"`
-	F3 []int64 `json:"f3"`
+	N  int   `json:"n"`
+	F1 []int `json:"f1"`
+	F2 []int `json:"f2"`
+	F3 []int `json:"f3"`
+	W1 []int `json:"w1"`
+	W2 []int `json:"w2"`
+	W3 []int `json:"w3"`
 }
 
 func main() {
