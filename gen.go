@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	wg1 int = 4
-	wg2 int = 2
+	wg1 int = 1
+	wg2 int = 1
 	wg3 int = 1
 )
 
@@ -61,10 +61,11 @@ func gen(d map[string]int, p []Pred, s string) (map[string]int, []Pred) {
 		if len(possibleFreq) == 0 {
 			apply = rand.Intn(len(p))
 		} else {
-			maxFreq := slices.Max(possibleFreq)
-			maxIdx := slices.Index(possibleFreq, maxFreq)
-			apply = possibleID[maxIdx]
+			// 最高スコア固定ではなく、確率選択を適用
+			apply = sampleWeighted(possibleID, possibleFreq)
 		}
+
+		res = append(res, apply)
 
 		res = append(res, apply)
 
@@ -143,4 +144,31 @@ func getInit(sentence string) (string, string, string) {
 		w3 = s[n-3]
 	}
 	return w1, w2, w3
+}
+
+// スコア（頻度）の高さに応じた確率で単語IDを選択する
+func sampleWeighted(ids []int, freqs []int) int {
+	// 1. スコアの総和を計算
+	total := 0
+	for _, f := range freqs {
+		total += f
+	}
+
+	// すべてのスコアが0以下の場合は均等ランダム
+	if total <= 0 {
+		return ids[rand.Intn(len(ids))]
+	}
+
+	// 2. 0 〜 total-1 の範囲で乱数を生成
+	r := rand.Intn(total)
+
+	// 3. 乱数がどの単語の領域に入るか判定
+	for i, f := range freqs {
+		if r < f {
+			return ids[i]
+		}
+		r -= f
+	}
+
+	return ids[len(ids)-1]
 }
