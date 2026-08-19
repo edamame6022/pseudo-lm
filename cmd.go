@@ -40,7 +40,7 @@ func cmd() (Mode, string, func(d map[string]int, p []Pred, path string) (map[str
 		args := learnCmd.Args()
 		if len(args) < 1 {
 			fmt.Println("error: The argument is required")
-			fmt.Println("usage: mycli learn <arg>")
+			fmt.Println("usage: cmd learn <arg>")
 			os.Exit(1)
 		}
 		return ModeSingle, args[0], learn
@@ -50,7 +50,7 @@ func cmd() (Mode, string, func(d map[string]int, p []Pred, path string) (map[str
 		args := genCmd.Args()
 		if len(args) < 1 {
 			fmt.Println("error: The argument is required")
-			fmt.Println("usage: mycli gen <arg>")
+			fmt.Println("usage: cmd gen <arg>")
 			os.Exit(1)
 		}
 		return ModeSingle, strings.Join(args, " "), gen
@@ -79,8 +79,8 @@ func parseInteractiveInput(line string) (string, string) {
 
 func printUsage() {
 	fmt.Println("usage:")
-	fmt.Println("  mycli <command> [arguments]")
-	fmt.Println("  mycli                       (Starts in interactive mode)")
+	fmt.Println("  cmd <command> [arguments]")
+	fmt.Println("  cmd                       (Starts in interactive mode)")
 	fmt.Println("\ncommands:")
 	fmt.Println("  interactive        Start standby interactive mode")
 	fmt.Println("  learn <filepath>   Learn from the file and update the data")
