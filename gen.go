@@ -67,8 +67,6 @@ func gen(d map[string]int, p []Pred, s string) (map[string]int, []Pred) {
 
 		res = append(res, apply)
 
-		res = append(res, apply)
-
 		// 次のループに向けて状態を1つずつシフト
 		p3 = p2
 		p2 = p1

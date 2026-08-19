@@ -25,6 +25,12 @@ func learn(d map[string]int, p []Pred, path string) (map[string]int, []Pred) {
 	for scanner.Scan() {
 		word := scanner.Text()
 
+		/*
+			if word == "split word" {
+				continue
+			}
+		*/
+
 		// 単語登録・番号保持
 		if v, ok := d[word]; ok {
 			p1 = v
